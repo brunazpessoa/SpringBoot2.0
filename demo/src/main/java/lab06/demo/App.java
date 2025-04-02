@@ -1,24 +1,16 @@
 package lab06.demo;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import static java.lang.System.out;
 import java.util.Scanner;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
 public class App implements CommandLineRunner {
-
-	@Autowired
-	private ProfessorRepo professorRepo;
-
-	@Autowired
-	private FaculdadeRepo faculdadeRepo;
-
-	private static Scanner entrada = new Scanner(System.in);
-
+	Scanner s = new Scanner(System.in);
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
@@ -26,14 +18,40 @@ public class App implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		out.println("# Gerenciador de Professores e Faculdades!");
-		//Professor p = new Professor("Carlos", "5555", 999);
-		//professorRepo.save(p);
-		//out.println("id do novo professor: " + p.getId());
-		Faculdade f = new Faculdade("Faculdade de Engenharia", 1890);
-		faculdadeRepo.save(f);
-		out.println("id da nova faculdade: " + f.getId());
-
-		out.println("Pressione ENTER para terminar o programa...");
-		entrada.nextLine();
+		int entrada;
+		do {
+			out.println("# MENU");
+			out.println("1) Cadastrar Faculdades");
+			out.println("2) Listar faculdades");
+			out.println("3)Cadastrar Professor");
+			out.println("4)Listar Professores");
+			out.println("5)Sair");
+			out.print("Digite uma das opções acima: ");
+			entrada = s.nextInt();
+		
+			switch(entrada){
+				case 3:
+					out.print("Nome do novo professor: ");
+					String nomeProf = s.next();
+					out.print("CPF do novo professor: ");
+					String cpfProf = s.next();
+					out.print("CPF do novo professor: ");
+					int matrProf = s.nextInt();
+					out.println("Faculdade do novo professor (selecione um dos números abaixo):");
+					out.println("- (1) Direito");
+					out.println("- (2) Computação e Informática");
+					out.print("Entre o número da faculdade: ");
+					int faculProf = s.nextInt();
+					Professor p = new Professor(nomeProf, cpfProf, matrProf);
+					Faculdade f1 = new Faculdade("Direito", 1999);
+					Faculdade f2 = new Faculdade("Computação e Informática", 1999);
+					if(faculProf == 1){
+						//p.setFaculdade("Direito");
+					}
+					else if(faculProf == 2){
+						//p.setFaculdade("Computação e Informática");
+					}
+			}
+		} while(entrada != 5);
 	}
 }

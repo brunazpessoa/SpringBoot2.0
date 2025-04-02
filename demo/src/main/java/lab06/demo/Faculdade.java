@@ -2,8 +2,10 @@ package lab06.demo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="faculdade")
 public class Faculdade {
     @Id @GeneratedValue
     private Long id;
@@ -32,4 +34,5 @@ public class Faculdade {
     public int getAnoFundacao() {
         return anoFundacao;
     }
+    
 }

@@ -1,16 +1,24 @@
 package lab06.demo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="professores")
 public class Professor {
     @Id @GeneratedValue
     private Long id;
     private String nome;
     private String cpf;
     private int matricula;
+    
+    @ManyToOne(fetch=FetchType.EAGER, optional=false)
+    private Faculdade faculdade;
+
     public Professor() {}
     public Professor(String n, String c, int m) {
         nome = n;
@@ -41,4 +49,10 @@ public class Professor {
     public int getMatricula() {
         return matricula;
     }
+    public Faculdade getFaculdade(){
+        return faculdade;
+    }
+    public void setFaculdade(Faculdade f){
+        faculdade = f;
+    }    
 }
